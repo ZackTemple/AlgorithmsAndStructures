@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "tests": "mocha --require ts-node/register Tests/**/*.ts"
+    "test-algorithms": "mocha --require ts-node/register Algorithms/Tests/**/*.ts"
   },
   "devDependencies": {
     "@types/chai": "^4.2.14",
