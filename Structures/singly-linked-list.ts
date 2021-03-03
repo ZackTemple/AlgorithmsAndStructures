@@ -1,6 +1,7 @@
 export class SinglyLinkedList {
   head: Node = null;
   foot: Node = null;
+  size = 0;
 
   push(val): void {
     let node = new Node(val);
@@ -13,6 +14,8 @@ export class SinglyLinkedList {
       this.foot.next = node;
       this.foot = node;
     }
+
+    this.size++;
   }
 
   pop(): void {
@@ -22,22 +25,24 @@ export class SinglyLinkedList {
     else if (this.head.next === null) {
       this.head = null;
       this.foot = null;
+      this.size--;
     }
     else {
-      let temp = this.head;
+      let curr = this.head;
       let prev = null;
 
-      while (temp.next !== null) {
-        prev = temp;
-        temp = temp.next;
+      while (curr.next !== null) {
+        prev = curr;
+        curr = curr.next;
       }
 
       prev.next = null;
       this.foot = prev;
+      this.size--;
     }
   }
 
-  unshift(val) {
+  unshift(val): void {
     let node = new Node(val);
 
     if (this.head === null) {
@@ -48,19 +53,71 @@ export class SinglyLinkedList {
       node.next = this.head;
       this.head = node;
     }
+
+    this.size++;
   }
 
   shift() {
+    let val = this.head;
     if (this.head === null) {
       // do nothing
     }
     else if (this.head.next === null) {
       this.head = null;
       this.foot = null;
+      this.size--;
     }
     else {
       this.head = this.head.next;
+      this.size--;
     }
+
+    return val;
+  }
+
+  reverseArray(): void {
+    let curr = this.head;
+    let prev = null;
+    let next = null;
+
+    while (curr !== null) {
+      next = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next;
+    }
+
+    this.foot = this.head;
+    this.head = prev;
+  }
+
+  insertAt(val: number, index: number): void {
+    if (index < 0 || index > this.size) {
+      return;
+    }
+
+    let node = new Node(val);
+    let current = this.head;
+    let previous: Node;
+    let counter = 0;
+
+    if (index === 0) {
+      node.next = current;
+      this.head = node;
+      this.size++;
+      return;
+    }
+
+    while (counter < index) {
+      previous = current;
+      current = current.next;
+      counter ++;
+    }
+
+    node.next = current;
+    previous.next = node;
+    if (!node.next) this.foot = node;
+    this.size++;
   }
 }
 
@@ -68,8 +125,9 @@ class Node {
   next: Node;
   value: number;
 
-  constructor(val: number) {
+  constructor(val: number, next = null) {
     this.value = val;
+    this.next = next;
   }
 
   updateValue(val: number): void {
