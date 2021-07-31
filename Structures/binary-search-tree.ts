@@ -75,7 +75,7 @@ export class BinarySearchTree {
     return data;
   }
 
-  // ----- DFS with Pure Recursion -----
+  // --------------- DFS with Pure Recursion ---------------
   public DFSPreOrder(node = this.root): number[] {
     let data = [];
 
@@ -106,7 +106,7 @@ export class BinarySearchTree {
     return data.concat(left.concat(right));
   }
 
-  // ----- DFS with Helper Method Recursion -----
+  // --------------- DFS with Helper Method Recursion ---------------
   public DFSPreOrderV2(): number[] {
     let data = [];
     let current = this.root;
