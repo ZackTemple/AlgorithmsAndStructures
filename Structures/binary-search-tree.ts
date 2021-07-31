@@ -1,79 +1,150 @@
-export class NodeBST {
-  left: NodeBST;
-  right: NodeBST;
-  data: number;
+class Node {
+  left: Node;
+  right: Node;
+  value: number;
 
-  public constructor(value: number) {
-    this.data = value;
+  constructor(val: any) {
+    this.value = val;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+export class BinarySearchTree {
+  root: Node;
+
+  public constructor() {
+    this.root = null;
   }
 
-  public insert(value: number): void {
-    if (value <= this.data) {
-      if (this.left === null) {
-        this.left = new NodeBST(value);
+  public insert(value: number, node = this.root): void {
+    const newNode = new Node(value);
+
+    if (this.root === null) {
+      this.root = newNode;
+    } else if (value === node.value) {
+      return;
+    } else if (value < node.value) {
+      if (node.left === null) {
+        node.left = newNode
       } else {
-        this.left.insert(value);
+        this.insert(value, node.left);
       }
     } else {
-      if (this.right === null) {
-        this.right = new NodeBST(value);
+      if (node.right === null) {
+        node.right = newNode
       } else {
-        this.right.insert(value);
+        this.insert(value, node.right);
       }
     }
   }
 
-  public contains(value: number): boolean {
-    if (this.data === value) {
-      return true;
-    } else if (value < this.data) {
-      if (this.left === null) {
-        return false;
+  public find(value: number, node = this.root): Node {
+    if (this.root === null) return undefined;
+
+    if (value === node.value) return node;
+
+    if (value < node.value) {
+      if (node.left === null) {
+        return undefined;
       } else {
-        return this.left.contains(value);
+          return this.find(value, node.left)
       }
     } else {
-      if (this.right === null) {
-        return false;
+      if (node.right === null) {
+        return undefined;
       } else {
-        return this.right.contains(value);
+        return this.find(value, node.right);
       }
     }
   }
 
-  public printInOrder(): void {
-    if (this.left !== null) {
-      this.left.printInOrder();
+  public BFS(): number[] {
+    let data = [];
+    let queue = [];
+    let currentNode = this.root;
+    queue.push(currentNode);
+
+    while (queue.length > 0) {
+      currentNode = queue.shift();
+      data.push(currentNode.value);
+      if (currentNode.left !== null) queue.push(currentNode.left);
+      if (currentNode.right !== null) queue.push(currentNode.right);
     }
 
-    console.log(this.data);
-
-    if(this.right !== null) {
-      this.right.printInOrder();
-    }
+    return data;
   }
 
-  public printPreOrder(): void {
-    console.log(this.data);
+  // ----- DFS with Pure Recursion -----
+  public DFSPreOrder(node = this.root): number[] {
+    let data = [];
 
-    if (this.left !== null) {
-      this.left.printPreOrder();
-    }
+    data.push(node.value);
+    let left = node.left !== null ? this.DFSPreOrder(node.left) : [];
+    let right = node.right !== null ? this.DFSPreOrder(node.right) : [];
 
-    if (this.right !== null) {
-      this.right.printPreOrder();
-    }
+    return data.concat(left.concat(right));
   }
 
-  public printPostOrder(): void {
-    if (this.right !== null) {
-      this.right.printPreOrder();
+  public DFSPostOrder(node = this.root): number[] {
+    let data = [];
+
+    let left = node.left !== null ? this.DFSPreOrder(node.left) : [];
+    let right = node.right !== null ? this.DFSPreOrder(node.right) : [];
+    data.push(node.value);
+
+    return data.concat(left.concat(right));
+  }
+
+  public DFSInOrder(node = this.root): number[] {
+    let data = [];
+
+    let left = node.left !== null ? this.DFSPreOrder(node.left) : [];
+    data.push(node.value);
+    let right = node.right !== null ? this.DFSPreOrder(node.right) : [];
+
+    return data.concat(left.concat(right));
+  }
+
+  // ----- DFS with Helper Method Recursion -----
+  public DFSPreOrderV2(): number[] {
+    let data = [];
+    let current = this.root;
+
+    function traverse(node) {
+      data.push(node.value);
+      if (node.left !== null) traverse(node.left);
+      if (node.right !== null) traverse(node.right);
     }
 
-    console.log(this.data);
+    traverse(current);
+    return data;
+  }
 
-    if (this.left !== null) {
-      this.left.printPreOrder();
+  public DFSPostOrderV2(): number[] {
+    let data = [];
+    let current = this.root;
+
+    function traverse(node) {
+      if (node.left !== null) traverse(node.left);
+      if (node.right !== null) traverse(node.right);
+      data.push(node.value);
     }
+
+    traverse(current);
+    return data;
+  }
+  public DFSInOrderV2(): number[] {
+    let data = [];
+    let current = this.root;
+
+    function traverse(node) {
+      if (node.left !== null) traverse(node.left);
+      data.push(node.value);
+      if (node.right !== null) traverse(node.right);
+    }
+
+    traverse(current);
+    return data;
   }
 }
