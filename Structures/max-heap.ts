@@ -55,9 +55,7 @@ export class MaxBinaryHeap {
   }
 
   private siftDownSwap(idx: number, childIdx: number, childVal: number): number {
-    let temp;
-
-    temp = this.data[idx];
+    let temp = this.data[idx];
     this.data[idx] = childVal;
     this.data[childIdx] = temp;
     idx = childIdx;
