@@ -1,6 +1,11 @@
 export class MaxBinaryHeap {
   data: number[] = [];
 
+  public leftChildIndex = (index: number) => 2 * index + 1;
+  public leftChild = (index: number) => this.data[this.leftChildIndex(index)];
+  public rightChildIndex = (index: number) => 2 * index + 2;
+  public rightChild = (index: number) => this.data[this.rightChildIndex(index)];
+
   public insert(value: number): void {
     this.data.push(value);
     this.bubbleUp();
@@ -37,15 +42,15 @@ export class MaxBinaryHeap {
 
   private siftDown(): void {
     let index = 0;
-    let leftChildIndex = (ind) => 2 * ind + 1
-    let leftChild = (ind) => this.data[leftChildIndex(ind)];
-    let rightChildIndex = (ind) => 2 * ind + 2
-    let rightChild = (ind) => this.data[rightChildIndex(ind)];
 
-    while (index < leftChild(index) || index < rightChild(index)) {
-      index = leftChild(index) > rightChild(index) ?
-        this.siftDownSwap(index, leftChildIndex(index), leftChild(index)) :
-        this.siftDownSwap(index, rightChildIndex(index), rightChild(index));
+    while (index < this.leftChild(index) || index < this.rightChild(index)) {
+      // We have to check if right is undefined because the right child could not exist
+      // We do not have to check if left is undefined, because if we have entered this loop, at least one of the children is defined (aka the left)
+      if (this.leftChild(index) > this.rightChild(index) || this.rightChild(index) === undefined) {
+        index = this.siftDownSwap(index, this.leftChildIndex(index), this.leftChild(index));
+      } else {
+        index = this.siftDownSwap(index, this.rightChildIndex(index), this.rightChild(index));
+      }
     }
   }
 
