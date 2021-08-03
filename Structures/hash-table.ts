@@ -9,7 +9,7 @@
 //  ...]
 // 3. Create linked lists for each hash code in the object (for an array, each index would be a linked list)
 
-export class HashTable {
+class HashTable {
   values: Object = {};
   size = 0
   length = 0;
