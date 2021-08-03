@@ -1,6 +1,6 @@
 // The following implementation allows for collision.
 // In order to handle collisions, we can do multiple things
-// 1. Change the hashmap to an arrya, and increase its size when collisions happen
+// 1. Change the hashmap to an array, and increase its size when collisions happen
 // 2. Create "buckets" when using arrays, that will create objects inside of the individual arrays whenever collisions happen:
 // [
 //    0: [{val: 'cat', ind: 0}, {val: 'dog', ind: 1}],
@@ -8,6 +8,8 @@
 //    2: [...],
 //  ...]
 // 3. Create linked lists for each hash code in the object (for an array, each index would be a linked list)
+
+// To see implementation with collision handling using separate chaining, check out hash-table-separate-chaining.ts
 
 class HashTable {
   values: Object = {};

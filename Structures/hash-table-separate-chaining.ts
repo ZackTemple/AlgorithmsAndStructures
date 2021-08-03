@@ -15,6 +15,7 @@ class HashTableWithSeparateChaining {
 
     // Don't need to loop over all keys; just get keys at specific index to see if key already exists
     const keysAtIndex = this.gatherKeysAtIndex(index);
+
     if (keysAtIndex.includes(key)) {
       for (let i = 0; i < keysAtIndex.length; i++) {
         if (keysAtIndex[i] === key) this.array[index][i][1] = value;
