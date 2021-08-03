@@ -1,4 +1,4 @@
-class HashTable2 {
+class HashTableWithSeparateChaining {
   arrayLength: number;
   array = [];
 
