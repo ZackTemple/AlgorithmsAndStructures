@@ -1,4 +1,4 @@
-class Graph {
+class UndirectedGraph {
   adjacencyList = {};
 
   addVertex(vertex: string) {
@@ -31,13 +31,8 @@ class Graph {
   }
 
   removeEdge(vertex1: string, vertex2: string) {
-    if (this.adjacencyList[vertex1].includes(vertex2)) {
-      this.adjacencyList[vertex1] = this.adjacencyList[vertex1].filter(vertex => vertex !== vertex2);
-    }
-
-    if (this.adjacencyList[vertex2].includes(vertex1)) {
-      this.adjacencyList[vertex2] = this.adjacencyList[vertex2].filter(vertex => vertex !== vertex1);
-    }
+    this.adjacencyList[vertex1] = this.adjacencyList[vertex1].filter(vertex => vertex !== vertex2);
+    this.adjacencyList[vertex2] = this.adjacencyList[vertex2].filter(vertex => vertex !== vertex1);
   }
 
 
@@ -77,6 +72,30 @@ class Graph {
         if (!visited[neighbor]) {
           visited[neighbor] = true;
           stack.push(neighbor);
+        }
+      });
+    }
+
+    return result;
+  }
+
+  BFS(start: string): string[] {
+    let result = [];
+    let queue = [];
+    let visited = {};
+    let currentVertex;
+
+    queue.push(start);
+
+    while(queue.length > 0) {
+      currentVertex = queue.shift();
+      result.push(currentVertex);
+      visited[currentVertex] = true;
+
+      this.adjacencyList[currentVertex].forEach(neighbor => {
+        if(!visited[neighbor]) {
+          visited[neighbor] = true;
+          queue.push(neighbor);
         }
       });
     }
