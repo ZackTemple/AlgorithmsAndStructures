@@ -1,4 +1,4 @@
-class NodePQ {
+export class NodePQ {
   value: string;
   priority: number;
 
@@ -8,7 +8,7 @@ class NodePQ {
   }
 }
 
-class PriorityQueue {
+export class PriorityQueue {
   public data: NodePQ[] = [];
 
   public leftChildIndex = (index: number) => 2 * index + 1;
@@ -26,14 +26,14 @@ class PriorityQueue {
   }
 
   public dequeue(): NodePQ {
-    if (this.data.length === 0) return undefined;
+    const min = this.data[0];
+    const end = this.data.pop();
+    if(this.data.length > 0){
+        this.data[0] = end;
+        this.siftDown();
+    }
 
-    const nodeToDequeue = this.data[0];
-    this.data[0] = this.data[this.data.length - 1];
-    this.data.pop();
-    this.siftDown();
-
-    return nodeToDequeue;
+    return min;
   }
 
   private bubbleUp(): void {

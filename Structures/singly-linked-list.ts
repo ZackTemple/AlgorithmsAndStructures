@@ -145,7 +145,6 @@ export class SinglyLinkedList {
 
     for(let i = 1; i <= index; i++) {
       current = current.next
-
     }
 
     return current;
