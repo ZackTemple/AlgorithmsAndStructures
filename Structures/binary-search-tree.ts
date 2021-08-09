@@ -48,7 +48,7 @@ export class BinarySearchTree {
       if (node.left === null) {
         return undefined;
       } else {
-          return this.find(value, node.left)
+        return this.find(value, node.left)
       }
     } else {
       if (node.right === null) {

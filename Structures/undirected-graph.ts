@@ -90,7 +90,6 @@ class UndirectedGraph {
     while(queue.length > 0) {
       currentVertex = queue.shift();
       result.push(currentVertex);
-      visited[currentVertex] = true;
 
       this.adjacencyList[currentVertex].forEach(neighbor => {
         if(!visited[neighbor]) {
