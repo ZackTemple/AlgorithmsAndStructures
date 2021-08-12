@@ -86,6 +86,7 @@ class UndirectedGraph {
     let currentVertex;
 
     queue.push(start);
+    visited[start] = true;
 
     while(queue.length > 0) {
       currentVertex = queue.shift();
