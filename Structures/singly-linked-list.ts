@@ -23,8 +23,7 @@ export class SinglyLinkedList {
     if (this.head === null) {
       this.head = node;
       this.tail = node;
-    }
-    else {
+    } else {
       this.tail.next = node;
       this.tail = node;
     }
@@ -32,16 +31,16 @@ export class SinglyLinkedList {
     this.size++;
   }
 
-  pop(): void {
+  pop(): Node {
     if (this.head === null) {
-      // do nothing
+      return undefined
     }
-    else if (this.head.next === null) {
+
+    const nodeToReturn = this.tail;
+    if (this.head.next === null) {
       this.head = null;
       this.tail = null;
-      this.size--;
-    }
-    else {
+    } else {
       let curr = this.head;
       let prev = null;
 
@@ -52,8 +51,10 @@ export class SinglyLinkedList {
 
       prev.next = null;
       this.tail = prev;
-      this.size--;
     }
+
+    this.size--;
+    return nodeToReturn;
   }
 
   unshift(val): void {
@@ -62,8 +63,7 @@ export class SinglyLinkedList {
     if (this.head === null) {
       this.head = node;
       this.tail = node;
-    }
-    else {
+    } else {
       node.next = this.head;
       this.head = node;
     }
@@ -71,17 +71,17 @@ export class SinglyLinkedList {
     this.size++;
   }
 
-  shift() {
+  shift(): Node {
     let val = this.head;
     if (this.head === null) {
-      // do nothing
+      return undefined;
     }
-    else if (this.head.next === null) {
+
+    if (this.head.next === null) {
       this.head = null;
       this.tail = null;
       this.size--;
-    }
-    else {
+    } else {
       this.head = this.head.next;
       this.size--;
     }
@@ -127,8 +127,8 @@ export class SinglyLinkedList {
 
   insertAtWithOtherMethods(index: number, value: number): void {
     if (index < 0 || index > this.size) return;
-    if (index === 0) this.unshift(value);
-    if (index === this.size + 1) this.push(value);
+    if (index === 0) return this.unshift(value);
+    if (index === this.size + 1) return this.push(value);
 
     let newNode = new Node(value);
     let prev = this.getAt(index - 1);

@@ -12,12 +12,14 @@ export class MaxBinaryHeap {
   }
 
   public extractMax(): number {
-    if ( this.data.length === 0) return undefined;
+    if (this.data.length === 0) return undefined;
     const removedRoot = this.data[0];
-    this.data[0] = this.data[this.data.length - 1];
-    this.data.pop();
+    const end = this.data.pop();
 
-    this.siftDown();
+    if (this.data.length > 0) {
+      this.data[0] = end;
+      this.siftDown();
+    }
 
     return removedRoot;
   }
