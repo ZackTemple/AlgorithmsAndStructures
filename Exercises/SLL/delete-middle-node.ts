@@ -2,7 +2,7 @@
 // the first and last node, not necessarily the exact middle) of a singly linked list, given only access to
 // that node.
 
-import { NodeSLL } from "../SLL";
+import { NodeSLL } from "./SLL";
 
 function deleteMiddle(node: NodeSLL): boolean {
   // can't delete if node is the head or tail, or if the node is null

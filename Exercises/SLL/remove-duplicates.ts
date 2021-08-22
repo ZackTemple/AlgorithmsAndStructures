@@ -1,6 +1,6 @@
 // Remove Dups: Write code to remove duplicates from an unsorted linked list.
 
-import { NodeSLL, SLL } from "../SLL";
+import { NodeSLL, SLL } from "./SLL";
 
 // Unsorted solution
 function removeDups(list: SLL) {
