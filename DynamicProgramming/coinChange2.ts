@@ -19,18 +19,18 @@ function coinChange(coins: number[], value: number): number {
   }
 
   for(let i = 1; i < coins.length; i++) {
-    for (let j = 0; j <= value; j++) {
-      // There is only one way ot make an amount of 0 for any given set of coins, and that is to use zero coins
-      if (j === 0) {
+    for (let amount = 0; amount <= value; amount++) {
+      // There is only one way to make an amount of 0 for any given set of coins, and that is to use zero coins
+      if (amount === 0) {
         dynArray[i] = [1];
-      } else if (j < coins[i]) {
+      } else if (amount < coins[i]) {
         // Cannot use given coin because it is too large, so use the other coins (so use stored answer)
-        dynArray[i][j] = dynArray[i - 1][j];
+        dynArray[i][amount] = dynArray[i - 1][amount];
       } else {
-        // Can use coin, so use the coin, find how much is left when doing j - coin value = leftOver,
+        // Can use coin, so use the coin, find how much is left when doing amount - coinValue = leftOver,
         // find the previous answer at [i][leftOver],
         // and then add that value to the previous value using only the other coins
-        dynArray[i][j] = dynArray[i - 1][j] + dynArray[i][j - coins[i]];
+        dynArray[i][amount] = dynArray[i][amount - coins[i]] + dynArray[i - 1][amount];
       }
     }
   }
