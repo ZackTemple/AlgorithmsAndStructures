@@ -2,27 +2,30 @@
 // digit. The digits are stored in reverse order, such that the 1 's digit is at the head of the list. Write a
 // function that adds the two numbers and returns the sum as a linked list.
 
-import { SLL } from "./SLL";
+import { NodeSLL, SLL } from "./SLL-exports";
 
 function sumLists(list1: SLL, list2: SLL) {
+  let dummyHead = new NodeSLL(0);
+  let currentNode = dummyHead;
   let carry = 0;
   let current1 = list1.head;
   let current2 = list2.head;
-  let newSLL = new SLL();
 
-  while (current1 || current2) {
-    let val1 = current1.value ?? 0;
-    let val2 = current2.value ?? 0;
+  while (current1 !== null || current2 !== null) {
+    let x = current1 !== null ? current1.value : 0;
+    let y = current2 !== null ? current2.value : 0;
+    let sum = x + y + carry;
 
-    let sum = val1 + val2 + carry;
-    let newNodeValue = sum % 10;
     carry = Math.floor(sum / 10);
+    let newNode = new NodeSLL(sum % 10);
+    currentNode.next = newNode;
+    currentNode = newNode;
 
-    newSLL.push(newNodeValue);
-
-    current1 = current1.next ?? null;
-    current2 = current2.next ?? null;
+    if (current1 !== null) current1 = current1.next;
+    if (current2 !== null) current2 = current2.next;
   }
 
-  return newSLL;
+  if (carry > 0) currentNode.next = new NodeSLL(carry);
+
+  return dummyHead.next;
 }
