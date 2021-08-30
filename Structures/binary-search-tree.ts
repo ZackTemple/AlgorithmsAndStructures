@@ -62,7 +62,7 @@ export class BinarySearchTree {
   public BFS(): number[] {
     let data = [];
     let queue = [];
-    let currentNode = this.root;
+    let currentNode;
     queue.push(currentNode);
 
     while (queue.length > 0) {

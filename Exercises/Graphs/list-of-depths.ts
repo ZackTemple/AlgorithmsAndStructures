@@ -1,7 +1,7 @@
 // List of Depths: Given a binary tree, design an algorithm which creates a linked list of all the nodes
 // at each depth (e.g., if you have a tree with depth D, you'll have D linked lists).
 
-import { NodeBST } from "./Graph";
+import { NodeBST } from "./graph-exports";
 
 // Structure: [[0], [1, 2], [3,4,5,6],...]
 function listOfDepths(root: NodeBST) {
