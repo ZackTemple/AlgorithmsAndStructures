@@ -1,4 +1,4 @@
-import { NodeBST } from "./Graph";
+import { NodeBST } from "./graph-exports";
 
 // Invert a binary search tree (recursion)
 var invertTree1 = function(root: NodeBST) {

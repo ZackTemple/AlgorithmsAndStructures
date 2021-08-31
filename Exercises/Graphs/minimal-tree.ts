@@ -1,7 +1,7 @@
 // Minimal Tree: Given a sorted (increasing order) array with unique integer elements, write an
 // algorithm to create a binary search tree with minimal height.
 
-import { NodeBST } from "./Graph";
+import { NodeBST } from "./graph-exports";
 
 function minimalTree(array: number[]): NodeBST {
   function createMinimalBST(start: number, end: number): NodeBST {

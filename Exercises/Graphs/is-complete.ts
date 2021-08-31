@@ -1,6 +1,6 @@
 // Write an algorithm to determine if a tree is complete
 
-import { NodeBST } from "./Graph";
+import { NodeBST } from "./graph-exports";
 
 function isCompleteBinaryTree(root: NodeBST) {
   if (root === null) return false;

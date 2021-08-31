@@ -19,7 +19,7 @@ function moveRobot(maze: boolean[][]): string[] {
 
       let isAtOrigin = row === 0 && column === 0;
       let decreaseColumn = move(row, column - 1);
-      let decreaseRow = move(row - 1, column - 1);
+      let decreaseRow = move(row - 1, column);
       let isValidPathOrAtOrigin = isAtOrigin || decreaseRow || decreaseColumn;
 
       if (isValidPathOrAtOrigin) {
